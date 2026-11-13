@@ -68,7 +68,7 @@ export function createTracker(opts: TrackerOptions): Tracker {
     ad_personalization: 'denied',
     wait_for_update: 500,
   });
-  gtag('js', new Date());
+  if (opts.debug) gtag('set', { debug_mode: true });
   gtag('config', id, {
     send_page_view: true,
     ...(opts.debug ? { debug_mode: true } : {}),
@@ -82,7 +82,7 @@ export function createTracker(opts: TrackerOptions): Tracker {
   return {
     enabled: true,
     track(name, params) {
-      gtag('event', name, params);
+      gtag('event', name, opts.debug ? { ...params, debug_mode: true } : params);
       if (opts.debug) console.info('[analytics]', name, params);
     },
     setUserProperties(props) {
