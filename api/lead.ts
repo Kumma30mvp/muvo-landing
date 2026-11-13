@@ -1,4 +1,4 @@
-import { validateLead } from '../src/lib/validation';
+import { validateLead } from '../src/lib/validation.js';
 
 /**
  * POST /api/lead — función serverless de Vercel (runtime Node, firma Web).
